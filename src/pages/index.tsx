@@ -13,7 +13,8 @@ const Home: NextPage = () => {
   const [items, setItems] = useState<ToDo[]>([]);
 
   function handleTextChanged(e: React.ChangeEvent) {
-    if (e.target.value != null) setText(e.target.value as string);
+    const target = e.target as HTMLTextAreaElement;
+    if (target.value != null) setText(target.value);
   }
 
   function handleKeyUp(e: React.KeyboardEvent) {
