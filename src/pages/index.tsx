@@ -1,6 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import React, { useState } from "react";
+import {handleTextChanged, handleKeyUp, toggleDone} from "./utils";
 
 export interface ToDo {
   text: string;
@@ -11,29 +12,6 @@ export interface ToDo {
 const Home: NextPage = () => {
   const [text, setText] = useState<string>("");
   const [items, setItems] = useState<ToDo[]>([]);
-
-  function handleTextChanged(e: React.ChangeEvent) {
-    const target = e.target as HTMLTextAreaElement;
-    if (target.value != null) setText(target.value);
-  }
-
-  function handleKeyUp(e: React.KeyboardEvent) {
-    if (e.code === "Enter") {
-      setItems([...items, { text: text, done: false, dateAdded: new Date() }]);
-      setText("");
-    }
-  }
-
-  const toggleDone = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const id = Number(e.currentTarget.id);
-    const item = items[id];
-    if (item != null) {
-      item.done = !item.done;
-      items[id] = item;
-      setItems([...items]);
-    }
-  };
 
   return (
     <>
